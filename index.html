@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Kene David Nwosu — Generative AI for Work & Research course portfolio." />
+  <title>Kene David Nwosu — Generative AI for Work & Research</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #637083;
+      --teal: #3f7880;
+      --teal-dark: #28565d;
+      --yellow: #f3be3a;
+      --paper: #f7f8f5;
+      --white: #ffffff;
+      --line: #dfe5e6;
+      --shadow: 0 18px 45px rgba(23, 32, 51, .08);
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { width: min(100% - 40px, var(--max)); margin-inline: auto; }
+
+    /* Soft network pattern inspired by the course materials. */
+    .network {
+      background:
+        radial-gradient(circle at 8% 20%, rgba(63,120,128,.12) 0 2px, transparent 3px),
+        radial-gradient(circle at 18% 70%, rgba(63,120,128,.10) 0 3px, transparent 4px),
+        radial-gradient(circle at 86% 22%, rgba(63,120,128,.10) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 80%, rgba(243,190,58,.10) 0 2px, transparent 3px),
+        linear-gradient(135deg, transparent 49.7%, rgba(63,120,128,.06) 49.8% 50.2%, transparent 50.3%),
+        linear-gradient(25deg, transparent 49.7%, rgba(63,120,128,.05) 49.8% 50.2%, transparent 50.3%);
+      background-size: 180px 180px, 220px 220px, 250px 250px, 260px 260px, 280px 280px, 360px 360px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(247,248,245,.86);
+      border-bottom: 1px solid rgba(223,229,230,.9);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      gap: 24px;
+    }
+    .mark {
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      font-size: .84rem;
+      color: var(--teal-dark);
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      font-size: .92rem;
+    }
+    .nav-links a { text-decoration: none; color: var(--muted); }
+    .nav-links a:hover { color: var(--ink); }
+
+    .hero {
+      padding: 90px 0 72px;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .85fr;
+      gap: 48px;
+      align-items: end;
+    }
+    .kicker {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 2px;
+      background: var(--yellow);
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      font-size: .77rem;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(3rem, 7vw, 6.1rem);
+      line-height: .96;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+    }
+    .hero-sub {
+      margin: 22px 0 0;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      max-width: 690px;
+      color: var(--ink);
+    }
+    .hero-side {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #fff, #f9fbfb);
+      box-shadow: var(--shadow);
+    }
+    .hero-side strong { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+    .hero-side span { color: var(--muted); }
+
+    section { padding: 76px 0; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      color: var(--teal);
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .77rem;
+      margin-bottom: 7px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.03em;
+    }
+    .lead {
+      max-width: 700px;
+      color: var(--muted);
+      margin: 12px 0 0;
+    }
+
+    .about-grid, .course-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card-pad { padding: 28px; }
+    .bio p { margin: 0 0 16px; }
+    .bio p:last-child { margin-bottom: 0; }
+
+    .facts {
+      display: grid;
+      gap: 0;
+      overflow: hidden;
+    }
+    .fact {
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .fact:last-child { border-bottom: 0; }
+    .fact b { color: var(--teal-dark); font-size: .83rem; text-transform: uppercase; letter-spacing: .05em; }
+    .fact span { color: var(--muted); }
+
+    .feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 30px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--white);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .module {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.78);
+    }
+    .num {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      font-weight: 800;
+      font-size: .88rem;
+    }
+    .module strong { display: block; margin-bottom: 4px; }
+    .module span { color: var(--muted); font-size: .92rem; }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+    .work {
+      padding: 24px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .work h3 { margin: 0 0 10px; font-size: 1.2rem; }
+    .work p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .tagline {
+      margin-top: 18px;
+      font-size: .77rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    .weeks {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+    .week {
+      padding: 22px;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .week:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 48px rgba(23,32,51,.11);
+      border-color: rgba(63,120,128,.38);
+    }
+    .week-number {
+      font-size: .77rem;
+      font-weight: 800;
+      color: var(--teal);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .week h3 { margin: 8px 0 8px; font-size: 1.03rem; }
+    .week p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .placeholder {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+      font-size: .8rem;
+      color: #85909c;
+    }
+
+    .footer {
+      padding: 34px 0 50px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .course-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr 1fr; }
+      .weeks { grid-template-columns: 1fr 1fr; }
+      .hero { padding-top: 72px; }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .nav-inner { padding: 8px 0; align-items: flex-start; flex-direction: column; }
+      .nav-links { gap: 14px; }
+      section { padding: 58px 0; }
+      .work-grid, .weeks, .modules { grid-template-columns: 1fr; }
+      .fact { grid-template-columns: 1fr; gap: 6px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .week { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="mark">Kene David Nwosu</div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About me</a>
+        <a href="#course">About the course</a>
+        <a href="#work">Selected work</a>
+        <a href="#submissions">Weekly submissions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero network">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="kicker">8-week live cohort course</div>
+          <h1>Generative AI for Work &amp; Research</h1>
+          <p class="hero-sub">
+            No-code AI tools for responsible task automation.
+            A learning portfolio by Kene David Nwosu.
+          </p>
+        </div>
+        <aside class="hero-side" aria-label="Profile snapshot">
+          <strong>R Developer &amp; Data Analyst</strong>
+          <span>PhD candidate in epidemiology · Geneva, Switzerland</span>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">About me</div>
+            <h2>Data, research &amp; education.</h2>
+            <p class="lead">PhD candidate in epidemiology, trained in data science and web development. Expert in R, proficient in Python and Javascript.</p>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <article class="card card-pad bio">
+            <p>I am a researcher and data analyst at the University of Geneva, investigating risk factors of negative outcomes along the cascade of care for HIV-positive female sex workers in Nigeria.</p>
+            <p>I also co-founded and co-direct <strong>The GRAPH Courses</strong>, a non-profit education platform with over 4000 learners, where we develop and deliver courses for R-based health data analysis.</p>
+            <p>My work sits at the intersection of epidemiology, quantitative analysis, web development and teaching.</p>
+          </article>
+
+          <div class="card facts" aria-label="Education and experience">
+            <div class="fact"><b>Education</b><span>PhD Candidate, Infectious Diseases &amp; Mathematical Modelling Group, University of Geneva</span></div>
+            <div class="fact"><b>Previous</b><span>MSc in Global Health (concentration in Statistics), University of Geneva</span></div>
+            <div class="fact"><b>Undergraduate</b><span>BA in Biology (concentration in Education), Vassar College · cum laude</span></div>
+            <div class="fact"><b>Languages</b><span>Native English · Spanish · B2 French</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="course" class="network">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">About the course</div>
+            <h2>Responsible AI, applied.</h2>
+            <p class="lead">At GRAPH Courses, the bootcamp-style approach combines academic rigor with practical, industry-relevant skills. The course focuses on real-world projects and responsible use of generative AI.</p>
+          </div>
+        </div>
+
+        <div class="feature-row" aria-label="Course features">
+          <span class="pill">Live weekly workshops</span>
+          <span class="pill">Hands-on practice</span>
+          <span class="pill">Personalized feedback</span>
+          <span class="pill">Dedicated office hours</span>
+          <span class="pill">Certificates of completion</span>
+          <span class="pill">ECTS credits for partner universities</span>
+        </div>
+
+        <div class="card card-pad">
+          <div class="eyebrow">Course modules</div>
+          <div class="modules">
+            <div class="module"><div class="num">01</div><div><strong>Documents, Presentations &amp; Websites</strong><span>Prompting, document generation, simple research websites and AI presentation tools.</span></div></div>
+            <div class="module"><div class="num">02</div><div><strong>Automated Data Analysis</strong><span>AI tools for quantitative data analysis, coding assistants and verification of statistical outputs.</span></div></div>
+            <div class="module"><div class="num">03</div><div><strong>GenAI for Research &amp; Text Analysis</strong><span>Literature review, structured extraction, qualitative analysis and managing hallucinations, costs and privacy.</span></div></div>
+            <div class="module"><div class="num">04</div><div><strong>Custom GPTs and Chatbots</strong><span>Knowledge bases, context windows, RAG, internal tools and safer external-facing chatbots.</span></div></div>
+            <div class="module"><div class="num">05</div><div><strong>AI Tools for Workflow Automation</strong><span>Triggers, research digests, browser-control agents and keeping a human in the loop.</span></div></div>
+            <div class="module"><div class="num">06</div><div><strong>GenAI for Communication &amp; Outreach</strong><span>AI-generated visuals, scientific diagrams, flyers, visual abstracts and video.</span></div></div>
+            <div class="module"><div class="num">07</div><div><strong>Capstone Project &amp; Showcase</strong><span>Collaborate, refine a final AI solution or presentation, receive feedback and present the result.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Selected work</div>
+            <h2>Projects beyond the course.</h2>
+            <p class="lead">A few projects from my work in data science, epidemiology and education.</p>
+          </div>
+        </div>
+
+        <div class="work-grid">
+          <article class="card work">
+            <div>
+              <h3>The GRAPH Courses</h3>
+              <p>Non-profit education platform with over 4000 learners. Online bootcamps, free videos and textbooks on data science.</p>
+            </div>
+            <div class="tagline">Web development · Teaching · Management</div>
+          </article>
+          <article class="card work">
+            <div>
+              <h3>GoContactR</h3>
+              <p>R Shiny app built for the WHO Regional Office to summarize COVID contact tracing follow-up data.</p>
+            </div>
+            <div class="tagline">R · Shiny · Data visualization</div>
+          </article>
+          <article class="card work">
+            <div>
+              <h3>DemoLandscapes</h3>
+              <p>R package and corresponding website for extracting and visualizing mortality rates from Demographic and Health Surveys data.</p>
+            </div>
+            <div class="tagline">WordPress · Data visualization · Statistics</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="submissions" class="network">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">My weekly submissions</div>
+            <h2>Eight weeks, one portfolio.</h2>
+            <p class="lead">Placeholders for now. Each card is ready for a submission link when it is available.</p>
+          </div>
+        </div>
+
+        <div class="weeks">
+          <article class="card week"><div><div class="week-number">Week 01</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 02</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 03</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 04</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 05</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 06</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 07</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+          <article class="card week"><div><div class="week-number">Week 08</div><h3>Submission placeholder</h3><p>Topic to be added</p></div><div class="placeholder">Link coming soon</div></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>Kene David Nwosu · Geneva, Switzerland</div>
+      <div>Generative AI for Work &amp; Research · The GRAPH Courses</div>
+    </div>
+  </footer>
+
+  <script>
+    // Keep the page framework-free: this only highlights the active nav section.
+    const links = [...document.querySelectorAll('.nav-links a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      links.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + visible.target.id
+          ? 'var(--ink)'
+          : 'var(--muted)';
+      });
+    }, { threshold: [0.2, 0.5, 0.8] });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>

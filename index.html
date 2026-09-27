@@ -112,15 +112,28 @@
       max-width: 690px;
       color: var(--ink);
     }
-    .hero-side {
-      padding: 26px;
+    .hero-visual {
+      margin: 0;
+      padding: 10px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, #fff, #f9fbfb);
+      border-radius: 28px;
+      background: var(--white);
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
-    .hero-side strong { display: block; font-size: 1.2rem; margin-bottom: 4px; }
-    .hero-side span { color: var(--muted); }
+    .hero-visual img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+    .hero-visual figcaption {
+      padding: 14px 10px 6px;
+      color: var(--muted);
+      font-size: .82rem;
+      text-align: center;
+    }
 
     section { padding: 76px 0; }
     .section-head {
@@ -343,10 +356,14 @@
             A learning portfolio by Kene David Nwosu.
           </p>
         </div>
-        <aside class="hero-side" aria-label="Profile snapshot">
-          <strong>R Developer &amp; Data Analyst</strong>
-          <span>PhD candidate in epidemiology · Geneva, Switzerland</span>
-        </aside>
+        <figure class="hero-visual">
+          <img
+            src="https://github.com/kendavidn/graph_ai_portfolio_sep_27/blob/main/CleanShot%202026-09-27%20at%2012.58.05@2x.jpg?raw=true"
+            alt="Kene David Nwosu"
+            loading="eager"
+          />
+          <figcaption>R Developer · Data Analyst · Educator</figcaption>
+        </figure>
       </div>
     </section>
 
